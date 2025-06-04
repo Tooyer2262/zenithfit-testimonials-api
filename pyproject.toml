@@ -3,6 +3,7 @@ name = "python-template"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
+package-mode = false  # ✅ This disables Poetry's packaging mode for simple apps
 
 [tool.poetry.dependencies]
 python = ">=3.11.0,<3.12"
