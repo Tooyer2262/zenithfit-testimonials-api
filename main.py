@@ -1,13 +1,17 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-DATA_FILE = "reviews.json"
+# ✅ Use persistent disk path
+DATA_FILE = "/data/reviews.json"
 
 def load_reviews():
+    if not os.path.exists(DATA_FILE):
+        return []
     with open(DATA_FILE, "r") as f:
         return json.load(f)
 
@@ -17,7 +21,6 @@ def save_review(new_review):
     with open(DATA_FILE, "w") as f:
         json.dump(reviews, f)
 
-# ✅ Add this route so the root URL doesn't show a 404
 @app.route("/")
 def home():
     return "ZenithFIT Testimonials API is running."
